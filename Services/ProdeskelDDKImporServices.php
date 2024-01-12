@@ -38,9 +38,9 @@
 namespace Modules\Prodeskel\Services;
 
 use App\Enums\StatusDasarEnum;
-use App\Models\Keluarga;
-use App\Models\Penduduk;
-use App\Services\ProdeskelDDKPilihanServices;
+use Modules\Prodeskel\Models\Keluarga;
+use Modules\Prodeskel\Models\Penduduk;
+use Modules\Prodeskel\Services\ProdeskelDDKPilihanServices;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

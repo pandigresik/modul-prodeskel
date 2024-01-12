@@ -2,7 +2,7 @@
     use \App\Enums\JenisKelaminEnum;
     use \Modules\Prodeskel\Enums\DDKEnum;
     use \Modules\Prodeskel\Enums\DDKPilihanBahanGalianAnggotaEnum;
-    use \App\Services\ProdeskelDDKPilihanServices;
+    use \Modules\Prodeskel\Services\ProdeskelDDKPilihanServices;
 @endphp
 
 <div class="row">

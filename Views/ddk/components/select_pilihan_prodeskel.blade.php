@@ -7,7 +7,7 @@
                 ($key . '' === ($selected_value . '' ?? ''))
                  ||
                  (str_contains($attribut, 'multiple')
-                    ? $key . '' === ''. $value_to_be_compared || in_array($key, $value_to_be_compared)
+                    ? $key . '' === ''. $value_to_be_compared || in_array($key, $value_to_be_compared ?? [])
                     : false)
             )
         >

@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <ol>
                                         <li value="1">Unduh file "Template Impor DDK" untuk diisi data ubahan
-                                            <a href="{{ site_url('prodeskel/ddk/impor/download-template-impor-ddk') }}" class="btn btn-social btn-info btn-sm margin">
+                                            <a href="{{ ci_route('prodeskel.ddk.impor.download-template-impor-ddk') }}" class="btn btn-social btn-info btn-sm margin">
                                                 <i class="fa fa-download"></i> Template Impor DDK
                                             </a>
                                             <p>Berkas pada tautan tersebut dapat dipergunakan untuk memasukkan data DDK Keluarga dan Anggota. Klik
@@ -81,12 +81,12 @@
                                                                     </tr>
                                                                 </thead>
                                                             </table>
-                                                            {!! form_open(site_url('keluarga/filter/cari'), 'id="form-ke-keluarga"') !!}
+                                                            {!! form_open(ci_route('keluarga.filter.cari'), 'id="form-ke-keluarga"') !!}
                                                                 <input id="cari" name="cari" type="hidden">
                                                             </form>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            {!! form_open(site_url('prodeskel/ddk/impor/download-daftar-data-impor-ddk'), 'id="unduhDataKeluargaForm"') !!}
+                                                            {!! form_open(ci_route('prodeskel.ddk.impor.download-daftar-data-impor-ddk'), 'id="unduhDataKeluargaForm"') !!}
                                                                 <input type="hidden" name="ids" value="">
                                                                 <button type="submit" class="unduhSemuaDataKeluarga btn btn-social btn-info btn-sm pull-left">
                                                                     <i class="fa fa-download"></i>Unduh semua data keluarga (Aktif)
@@ -113,7 +113,7 @@
                             <p>Proses ini akan membutuhkan waktu beberapa menit.</p>
                             <p></p>
                             <hr>
-                            {!! form_open(site_url('prodeskel/ddk/impor/upload-excel-ubahan'), 'class="form-horizontal" id="impor" enctype="multipart/form-data"') !!}
+                            {!! form_open(ci_route('prodeskel.ddk.impor.upload-excel-ubahan'), 'class="form-horizontal" id="impor" enctype="multipart/form-data"') !!}
                                 <div class="form-group">
                                     <label for="file" class="col-md-2 col-lg-3 control-label">Pilih File .xlsx:</label>
                                     <div class="col-sm-12 col-md-5 col-lg-5">

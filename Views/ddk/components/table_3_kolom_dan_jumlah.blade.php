@@ -28,7 +28,7 @@
                 }
             @endphp
 
-            @if(array_key_exists($ddk_field, $data->value))
+            @if(array_key_exists($ddk_field, $data->value ?? []))
                 <tr>
                     <td>{{ $ddk_field }}</td>
                     <td>{{ $$kode_unik_tabel }}</td>

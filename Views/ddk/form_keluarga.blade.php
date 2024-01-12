@@ -1,7 +1,7 @@
 @php
     use \Modules\Prodeskel\Enums\DDKEnum;
     use \Modules\Prodeskel\Enums\DDKPilihanProduksiTahunIniEnum;
-    use \App\Services\ProdeskelDDKPilihanServices;
+    use \Modules\Prodeskel\Services\ProdeskelDDKPilihanServices;
     use \Modules\Prodeskel\Enums\DDKPilihanCheckboxEnum;
 @endphp
 
@@ -218,7 +218,7 @@
                 <th>Kondisi Sumber Air Minum</th>
             </tr>
             @foreach(ProdeskelDDKPilihanServices::sumberAirMinum($custom_value) as $ddk_field => $sumber_air_minum)
-                @if(array_key_exists($ddk_field, $ddk->detailKeluarga[DDKEnum::KODE_SUMBER_AIR_MINUM]->value))
+                @if(array_key_exists($ddk_field, $ddk->detailKeluarga[DDKEnum::KODE_SUMBER_AIR_MINUM]->value ?? []))
                     <tr>
                         <td>{{ $ddk_field }}</td>
                         <td>{{ $sumber_air_minum }}</td>
@@ -253,7 +253,7 @@
                 <th>Luas Lahan (ha)</th>
             </tr>
             @foreach(ProdeskelDDKPilihanServices::kepemilikanLahan($custom_value) as $ddk_field => $kepemilikan_lahan)
-                @if(array_key_exists($ddk_field, $ddk->detailKeluarga[DDKEnum::KODE_KEPEMILIKAN_LAHAN]->value))
+                @if(array_key_exists($ddk_field, $ddk->detailKeluarga[DDKEnum::KODE_KEPEMILIKAN_LAHAN]->value ?? [] ))
                     <tr>
                         <td>{{ $ddk_field }}</td>
                         <td>{{ $kepemilikan_lahan }}</td>

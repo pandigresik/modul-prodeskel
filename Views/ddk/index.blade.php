@@ -24,7 +24,7 @@
           <div class="box box-info">
             <div class="box-header with-border">
                 @if (can('u'))
-                    <a href="{{ site_url('prodeskel/ddk/impor') }}" class="btn btn-social btn-flat bg-navy btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Impor Data Survey DDK" >
+                    <a href="{{ ci_route('prodeskel.ddk.impor') }}" class="btn btn-social btn-flat bg-navy btn-sm btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Impor Data Survey DDK" >
                         <i class="fa fa-upload"></i>Impor
                     </a>
                 @endif
@@ -47,7 +47,7 @@
                         </thead>
                     </table>
                 </div>
-                {!! form_open(site_url('keluarga/filter/cari'), 'id="form-ke-keluarga"') !!}
+                {!! form_open(ci_route('keluarga.filter.cari'), 'id="form-ke-keluarga"') !!}
                     <input id="cari" name="cari" type="hidden">
                 </form>
             </div>
@@ -85,7 +85,7 @@
                         orderable: true,
                         render: function(data, type){
                             if(type == 'display'){
-                                return `<a href="#" class="buka-keluarga" onClick="$('#cari').val('` +  data  + `');formAction('form-ke-keluarga', '{{ site_url('keluarga/filter/cari') }}')">` + data + `</a>`;
+                                return `<a href="#" class="buka-keluarga" onClick="$('#cari').val('` +  data  + `');formAction('form-ke-keluarga', '{{ ci_route('keluarga.filter.cari') }}')">` + data + `</a>`;
                             }
 
                             return data;

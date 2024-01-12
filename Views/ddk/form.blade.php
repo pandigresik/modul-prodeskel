@@ -26,17 +26,17 @@
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{ ci_route('prodeskel/ddk') }}"><i class="fa fa-users"></i> Data Dasar Keluarga (DDK)</a></li>
+    <li><a href="{{ ci_route('prodeskel.ddk') }}"><i class="fa fa-users"></i> Data Dasar Keluarga (DDK)</a></li>
     <li class="active">Formulir Data Dasar Keluarga (DDK)</li>
 @endsection
 
 @section('content')
     <div class="row">
-        {!! form_open(site_url('prodeskel/ddk/save/' . $keluarga->id), 'class="form-validasi" id="form-1"') !!}
+        {!! form_open(ci_route('prodeskel.ddk.save.form' , $keluarga->id), 'class="form-validasi" id="form-1"') !!}
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <a href="{{ ci_route('prodeskel/ddk') }}" class="btn btn-social btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Data Dtks"><i class="fa fa-arrow-circle-o-left"></i>Kembali Ke Data Dasar Keluarga (DDK)</a>
+                        <a href="{{ ci_route('prodeskel.ddk') }}" class="btn btn-social btn-info btn-sm visible-xs-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block" title="Kembali Ke Data Dtks"><i class="fa fa-arrow-circle-o-left"></i>Kembali Ke Data Dasar Keluarga (DDK)</a>
                     </div>
                     <div class="box-body tab-content" style="padding-left:30px; padding-right:30px">
                         <div class="nav-tabs-custom">
@@ -196,7 +196,7 @@
                         Swal.showLoading()
                     }
                 });
-                ajax_save_dtks("{{ site_url('prodeskel/ddk/save/' . $keluarga->id) }}", form,
+                ajax_save_dtks("{{ ci_route('prodeskel.ddk.save.form' , $keluarga->id) }}", form,
                     callback_success = function(data){
                         let otomatis = data.otomatis;
                         if((typeof otomatis == 'object' || typeof otomatis == 'array')){

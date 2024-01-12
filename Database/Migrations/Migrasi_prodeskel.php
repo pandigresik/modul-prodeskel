@@ -65,7 +65,7 @@ return new class extends MY_model
     protected function tambahSubMenuProdeskelPadaSatuData($hasil)
     {        
         // cek modul satu data dan prodeskel
-        $satu_data = Modul::where(['modul' => 'Satu Data'])->count();
+        $satu_data = Modul::where(['modul' => 'Satu Data'])->first();
         $prodeskel = Modul::where(['modul' => 'Prodeskel', 'slug' => 'prodeskel'])->first();
 
         if ( ! $satu_data) {
@@ -73,14 +73,9 @@ return new class extends MY_model
 
             throw new Exception("Menu 'Satu Data' tidak ditemukan");
         }
-
-        if ($prodeskel) {
-            log_message('error', "Migrasi Prodeskel Gagal, Prodeskel sudah ada");
-
-            throw new Exception("Migrasi Prodeskel Gagal, Prodeskel sudah ada");
-        }        
-
-        return $hasil && $this->tambah_modul([
+        // case  upgrade versi, kalau belum ada buat menu
+        if (! $prodeskel) {
+            return $hasil && $this->tambah_modul([
                 'config_id'  => identitas('id'),                
                 'modul'      => 'Prodeskel',
                 'url'        => 'prodeskel',
@@ -94,6 +89,9 @@ return new class extends MY_model
                 'ikon_kecil' => 'fa-exchange',
             ]);
 
+        }
+
+        
     }
 
     protected function createProdeskelDDKTable($hasil)
@@ -103,8 +101,8 @@ return new class extends MY_model
                 $table->integer('id', true);
                 $table->integer('config_id');
                 $table->integer('keluarga_id');
-                $table->unsignedTinyInteger('bulan');
-                $table->year('tahun');
+                $table->unsignedTinyInteger('bulan')->nullable();
+                $table->year('tahun')->nullable();
                 $table->string('nama_pengisi', 100)->nullable();
                 $table->string('pekerjaan', 100)->nullable();
                 $table->string('jabatan', 100)->nullable();
@@ -131,7 +129,7 @@ return new class extends MY_model
                 $table->integer('config_id');
                 $table->integer('prodeskel_ddk_id');
                 $table->integer('keluarga_id');
-                $table->integer('penduduk_id');
+                $table->integer('penduduk_id')->nullable();
                 $table->string('kode_field', 50);
                 $table->longText('value')->nullable();
                 $table->timestamps();
@@ -286,6 +284,8 @@ return new class extends MY_model
         if ($prodeskel){
             GrupAkses::whereIn('id_modul', $prodeskel->pluck('id'))->delete();
             Modul::whereSlug('prodeskel')->delete();
+            // Hapus cache menu navigasi
+            $this->cache->hapus_cache_untuk_semua('_cache_modul');
         }
         
         Schema::dropIfExists('prodeskel_custom_value');

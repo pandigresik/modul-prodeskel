@@ -11,7 +11,7 @@
  * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
  *
  * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * Hak Cipta 2016 - 2023 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
  *
  * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
  * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
@@ -29,19 +29,43 @@
  * @package   OpenSID
  * @author    Tim Pengembang OpenDesa
  * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * @copyright Hak Cipta 2016 - 2023 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+ * @copyright Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
  * @license   http://www.gnu.org/licenses/gpl.html GPL V3
  * @link      https://github.com/OpenSID/OpenSID
  *
  */
 
-Route::group('prodeskel', static function(){
-    Route::get('/', 'Prodeskel@pengaturan');
-    Route::get('/ddk', 'Prodeskel@ddk');    
-    Route::post('/ddk/save/{tipe}/{keluarga_id?}', 'Prodeskel@ddkSave');
-    Route::get('/ddk/cetak/{keluarga_id}', 'Prodeskel@ddkCetak');
-    Route::match(['GET', 'POST'], '/ddk/impor/{tipe?}', 'Prodeskel@ddkImpor');    
-    Route::get('/datatablesDDK', 'Prodeskel@datatablesDDK');
-    Route::get('/templateHtml', 'Prodeskel@templateHtml');
-    Route::get('/ddk/{keluarga_id}', 'Prodeskel@ddkForm');
-});
+namespace Modules\Prodeskel\Models;
+
+
+use Modules\Prodeskel\Models\ProdeskelDDK;
+use App\Models\Keluarga as KeluargaAsli;
+
+defined('BASEPATH') || exit('No direct script access allowed');
+
+class Keluarga extends KeluargaAsli
+{
+    public function scopeWithoutDefaultRelations($query)
+    {
+        return $query->without($this->newInstance()->with);
+    }    
+    /**
+     * Define a one-to-one relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function kepalaKeluarga()
+    {
+        return $this->hasOne(Penduduk::class, 'id', 'nik_kepala')->withoutGlobalScope(\App\Scopes\ConfigIdScope::class);
+    }
+
+    /**
+     * Define a one-to-one relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function prodeskelDDK()
+    {
+        return $this->hasOne(ProdeskelDDK ::class,  'keluarga_id');
+    }
+}

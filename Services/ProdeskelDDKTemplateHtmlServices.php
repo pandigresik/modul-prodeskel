@@ -223,7 +223,7 @@ class ProdeskelDDKTemplateHtmlServices
         $html .=  '<p class="list">1.13 Aset Sarana Produksi</p>'
         . self::buatTabelDatanyaDibagi(1, DDKEnum::KODE_ASET_SARANA_PRODUKSI, $values, array_keys($values));
         $html .=  '<p class="list">1.14 Aset Perumahan</p>'
-        . self::asetPerumahan($custom_value, false);
+        . self::asetPerumahan($custom_value);
         $values = ProdeskelDDKPilihanServices::asetLainnya($custom_value, false);
         $html .=  '<p class="list">1.15 Aset Lainnya dalam Keluarga</p>'
         . self::buatTabelDatanyaDibagi(2, DDKEnum::KODE_ASET_LAINNYA, $values, array_keys($values));
