@@ -60,6 +60,20 @@ class Keluarga extends KeluargaAsli
     }
 
     /**
+     * Define a one-to-many relationship.
+     *
+     * @return HasMany
+     */
+    public function anggota()
+    {
+        return $this->hasMany(Penduduk::class, 'id_kk')
+            ->status(1)
+            ->orderBy('kk_level')
+            ->orderBy('tanggallahir')
+            ->withoutGlobalScope(\App\Scopes\ConfigIdScope::class);
+    }
+
+    /**
      * Define a one-to-one relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
