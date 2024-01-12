@@ -75,7 +75,7 @@ return new class extends MY_model
         }
         // case  upgrade versi, kalau belum ada buat menu
         if (! $prodeskel) {
-            return $hasil && $this->tambah_modul([
+            $this->tambah_modul([
                 'config_id'  => identitas('id'),                
                 'modul'      => 'Prodeskel',
                 'url'        => 'prodeskel',
@@ -88,10 +88,10 @@ return new class extends MY_model
                 'hidden'     => '0',
                 'ikon_kecil' => 'fa-exchange',
             ]);
-
+            hapus_cache('_cache_modul');
         }
 
-        
+        return $hasil;
     }
 
     protected function createProdeskelDDKTable($hasil)
@@ -285,7 +285,7 @@ return new class extends MY_model
             GrupAkses::whereIn('id_modul', $prodeskel->pluck('id'))->delete();
             Modul::whereSlug('prodeskel')->delete();
             // Hapus cache menu navigasi
-            $this->cache->hapus_cache_untuk_semua('_cache_modul');
+            hapus_cache('_cache_modul');
         }
         
         Schema::dropIfExists('prodeskel_custom_value');

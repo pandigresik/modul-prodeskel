@@ -48,8 +48,7 @@ use Modules\Prodeskel\Services\ProdeskelDDKTemplateHtmlServices;
 defined('BASEPATH') || exit('No direct script access allowed');
 
 class Prodeskel extends Admin_Controller
-{
-    public $aliasController = 'modul';
+{    
     public function __construct()
     {
         parent::__construct();

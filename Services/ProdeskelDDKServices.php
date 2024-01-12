@@ -71,10 +71,10 @@ class ProdeskelDDKServices
             ->addColumn('aksi', static function ($row) {
                 $aksi = '';
                 if (can('u')) {
-                    $aksi .= '&nbsp;<a href="' . ci_route("prodeskel/ddk/{$row->id}") . '" class="btn btn-warning btn-sm"  title="Lihat & Ubah Data"><i class="fa fa-edit"></i></a> ';
+                    $aksi .= '&nbsp;<a href="' . ci_route("prodeskel.ddk", $row->id) . '" class="btn btn-warning btn-sm"  title="Lihat & Ubah Data"><i class="fa fa-edit"></i></a> ';
                 }
                 if($row->updated_at){
-                    $aksi .= '&nbsp;<a href="' . ci_route("prodeskel/ddk/cetak/{$row->id}") . '" class="btn bg-purple btn-sm"  title="Cetak Data"><i class="fa fa-print"></i></a> ';
+                    $aksi .= '&nbsp;<a href="' . ci_route("prodeskel.ddk.cetak", $row->id) . '" class="btn bg-purple btn-sm"  title="Cetak Data"><i class="fa fa-print"></i></a> ';
                 }
 
                 return $aksi;
@@ -119,7 +119,7 @@ class ProdeskelDDKServices
                 $builder->status(StatusDasarEnum::HIDUP);
             },
             'anggota' => static function ($builder) {
-                $builder->withoutDefaultRelations();
+                $builder->withOnly([]);
                 $builder->status(StatusDasarEnum::HIDUP);
             },
             'prodeskelDDK',
@@ -353,7 +353,7 @@ class ProdeskelDDKServices
                 $builder->status(StatusDasarEnum::HIDUP);
             },
             'anggota' => function($builder){
-                $builder->withoutDefaultRelations();
+                $builder->withOnly([]);
                 $builder->status(StatusDasarEnum::HIDUP);
             }
         ]);
@@ -911,7 +911,7 @@ class ProdeskelDDKServices
                     $builder->status(StatusDasarEnum::HIDUP);
                 },
                 'anggota' => static function ($builder) {
-                    $builder->withoutDefaultRelations();
+                    $builder->withOnly([]);
                     $builder->status(StatusDasarEnum::HIDUP);
                 },
                 'prodeskelDDK',
@@ -999,6 +999,7 @@ class ProdeskelDDKServices
         }
         $hash_ddk = hash_file(DDKEnum::HASH_ALGO, DDKEnum::PATH_TEMPLATE . DDKEnum::FILE_TEMPLATE_DDK);
         $hash_ddk_anggota = hash_file(DDKEnum::HASH_ALGO, DDKEnum::PATH_TEMPLATE . DDKEnum::FILE_TEMPLATE_DDK_ANGGOTA);
+        
         if($hash[DDKEnum::HASH_TEMPLATE_DDK] != $hash_ddk){
             log_message('error', 'File template FormDDK.rtf telah berubah');
             show_error('File template FormDDK.rtf telah berubah');

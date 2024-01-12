@@ -124,7 +124,7 @@ class ProdeskelDDKImporServices extends ProdeskelDDKServices
                         $builder->status(StatusDasarEnum::HIDUP);
                     },
                     'anggota' => static function ($builder) {
-                        $builder->withoutDefaultRelations();
+                        $builder->withOnly([]);
                         $builder->status(StatusDasarEnum::HIDUP);
                     },
                     'prodeskelDDK',
@@ -822,7 +822,7 @@ class ProdeskelDDKImporServices extends ProdeskelDDKServices
                 },
                 'anggota' => static function ($builder) {
                     $builder->select(['id', 'nama', 'nik', 'id_kk', 'kk_level']);
-                    $builder->withoutDefaultRelations();
+                    $builder->withOnly([]);
                     $builder->status(StatusDasarEnum::HIDUP);
                 },
                 'prodeskelDDK',
