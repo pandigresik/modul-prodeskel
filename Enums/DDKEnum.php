@@ -13,7 +13,7 @@ class DDKEnum
     const HASH_TEMPLATE_DDK         = 'ddk_rtf_hash';
     const HASH_TEMPLATE_DDK_ANGGOTA = 'ddk_anggota_rtf_hash';
     // path dan file
-    const PATH_TEMPLATE             =  'donjo-app'.DIRECTORY_SEPARATOR.'Modules'. DIRECTORY_SEPARATOR.'Prodeskel'. DIRECTORY_SEPARATOR. 'template-prodeskel' . DIRECTORY_SEPARATOR;
+    const PATH_TEMPLATE             =  'donjo-app'.DIRECTORY_SEPARATOR.'Modules'. DIRECTORY_SEPARATOR.'Prodeskel'. DIRECTORY_SEPARATOR. 'Storage'. DIRECTORY_SEPARATOR. 'template' . DIRECTORY_SEPARATOR;
     const FILE_TEMPLATE_DDK         = 'FormDDK.rtf';
     const FILE_TEMPLATE_DDK_ANGGOTA = 'FormDDKAnggota.rtf';
 
