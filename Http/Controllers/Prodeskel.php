@@ -47,17 +47,23 @@ use Modules\Prodeskel\Services\ProdeskelDDKTemplateHtmlServices;
 
 defined('BASEPATH') || exit('No direct script access allowed');
 
-class Prodeskel extends Admin_Controller
+class Prodeskel extends Admin_Modul_Controller
 {    
     public function __construct()
     {
         parent::__construct();
         $this->modul_ini     = 'satu-data';
         $this->sub_modul_ini = 'prodeskel';
+        $this->loadHelper();
     }
-
+    protected function loadHelper(){
+        $moduleDirectory = substr(__DIR__, 0,-1 * strlen('Http/Controllers'));
+        foreach (glob($moduleDirectory . '/Helpers/*.php') as $file) {
+            require_once $file;
+        }
+    }
     public function pengaturan()
-    {
+    {        
         $navigasi      = 'pengaturan';
         $semua_kode    = array_keys(DDKMaxCustomDataPilihanEnum::semua());
         $custom_values = ProdeskelCustomValue::select('kode_value', 'value_long')
