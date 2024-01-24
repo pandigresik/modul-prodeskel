@@ -53,11 +53,12 @@ class Prodeskel extends Admin_Modul_Controller
     {
         parent::__construct();
         $this->modul_ini     = 'satu-data';
-        $this->sub_modul_ini = 'prodeskel';        
+        $this->sub_modul_ini = 'prodeskel';
+        log_message('error', config('prodeskel.view_path'));        
     }
 
     public function getModuleDirectory(){
-        return substr(__DIR__, 0, -1 * strlen('Http/Controllers'));
+        return substr(__DIR__, 0, -1 * strlen('/Http/Controllers'));
     }
     
     public function pengaturan()
